@@ -1,24 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useReducer} from 'react';
+
+function reducer(state,action){
+switch(action.type){
+case "increment":
+  return state + 1;
+
+case "decrement":
+  return state - 1;
+  
+  default:
+    return state;
+
+}
+}
+
+
+
+
 
 function App() {
+
+  const [count,dispatch] =  useReducer(reducer,0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <div>count : {count}</div>
+      <button onClick={() => dispatch({type: "increment"})}>increment</button>
+      <button onClick={() => dispatch({type: "decrement"})}>decrement</button>
     </div>
   );
 }
